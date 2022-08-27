@@ -1,5 +1,6 @@
 /// Class to be used to format response from the cloudinary api
 class CloudinaryResponse {
+  final Map<String, dynamic> rawResponse;
   final String assetId;
   final String publicId;
   final DateTime createdAt;
@@ -18,6 +19,7 @@ class CloudinaryResponse {
   }
 
   CloudinaryResponse({
+    required this.rawResponse,
     required this.assetId,
     required this.publicId,
     required this.createdAt,
@@ -38,16 +40,16 @@ class CloudinaryResponse {
       url: data['url'] ?? '',
       secureUrl: data['secure_url'] ?? '',
       originalFilename: data['original_filename'] ?? '',
-      tags: data['tags'] != null
-          ? (data['tags'] as List).map((tag) => tag as String).toList()
-          : [],
+      tags: data['tags'] != null ? (data['tags'] as List).map((tag) => tag as String).toList() : [],
       context: data['context'] is Map ? data['context'] : {},
+      rawResponse: data,
     );
   }
 
   /// Sets the [fromCache] property to true
   CloudinaryResponse enableCache() {
     return CloudinaryResponse(
+      rawResponse: rawResponse,
       assetId: assetId,
       publicId: publicId,
       createdAt: createdAt,
@@ -71,6 +73,7 @@ class CloudinaryResponse {
       'original_filename': originalFilename,
       'tags': tags,
       'context': context,
+      'rawResponse': rawResponse,
     };
   }
 

@@ -63,13 +63,13 @@ class CloudinaryPublic {
   Future<CloudinaryResponse> uploadFile(
     CloudinaryFile file, {
     String? uploadPreset,
+    Map<String, String> formData = const {},
     ProgressCallback? onProgress,
   }) async {
     if (cache) {
       assert(file.identifier != null, 'identifier is required for caching');
 
-      if (_uploadedFiles.containsKey(file.identifier))
-        return _uploadedFiles[file.identifier]!.enableCache();
+      if (_uploadedFiles.containsKey(file.identifier)) return _uploadedFiles[file.identifier]!.enableCache();
     }
 
     final url = '$_baseUrl/$_cloudName/'
@@ -119,7 +119,7 @@ class CloudinaryPublic {
       data['context'] = context.replaceFirst('|', '');
     }
 
-    request.fields.addAll(data);
+    request.fields.addAll({...formData, ...data});
 
     final sendRequest = await client!.send(request);
 
