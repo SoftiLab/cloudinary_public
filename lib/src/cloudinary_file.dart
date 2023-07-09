@@ -1,6 +1,5 @@
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 /// The recognised file class to be used for this package
@@ -46,7 +45,7 @@ class CloudinaryFile {
 
   /// [CloudinaryFile] instance
   const CloudinaryFile._({
-    this.resourceType: CloudinaryResourceType.Auto,
+    this.resourceType = CloudinaryResourceType.Auto,
     this.byteData,
     this.bytesData,
     this.filePath,
@@ -60,7 +59,7 @@ class CloudinaryFile {
   /// Instantiate [CloudinaryFile] from future [ByteData]
   static Future<CloudinaryFile> fromFutureByteData(Future<ByteData> byteData,
           {String? identifier,
-          CloudinaryResourceType resourceType: CloudinaryResourceType.Auto,
+          CloudinaryResourceType resourceType = CloudinaryResourceType.Auto,
           List<String>? tags}) async =>
       CloudinaryFile.fromByteData(
         await byteData,
@@ -73,7 +72,7 @@ class CloudinaryFile {
   factory CloudinaryFile.fromByteData(
     ByteData byteData, {
     String? identifier,
-    CloudinaryResourceType resourceType: CloudinaryResourceType.Auto,
+    CloudinaryResourceType resourceType = CloudinaryResourceType.Auto,
     List<String>? tags,
     String? folder,
     Map<String, dynamic>? context,
@@ -92,7 +91,7 @@ class CloudinaryFile {
   factory CloudinaryFile.fromBytesData(
     List<int> bytesData, {
     String? identifier,
-    CloudinaryResourceType resourceType: CloudinaryResourceType.Auto,
+    CloudinaryResourceType resourceType = CloudinaryResourceType.Auto,
     List<String>? tags,
     String? folder,
     Map<String, dynamic>? context,
@@ -111,7 +110,7 @@ class CloudinaryFile {
   factory CloudinaryFile.fromFile(
     String path, {
     String? identifier,
-    CloudinaryResourceType resourceType: CloudinaryResourceType.Auto,
+    CloudinaryResourceType resourceType = CloudinaryResourceType.Auto,
     List<String>? tags,
     String? folder,
     Map<String, dynamic>? context,
@@ -129,7 +128,7 @@ class CloudinaryFile {
   /// Instantiate [CloudinaryFile] from an external url
   factory CloudinaryFile.fromUrl(
     String url, {
-    CloudinaryResourceType resourceType: CloudinaryResourceType.Auto,
+    CloudinaryResourceType resourceType = CloudinaryResourceType.Auto,
     List<String>? tags,
     String? folder,
     Map<String, dynamic>? context,

@@ -26,9 +26,9 @@ class CloudinaryResponse {
     required this.url,
     required this.secureUrl,
     required this.originalFilename,
-    this.tags: const [],
-    this.context: const {},
-    this.fromCache: false,
+    this.tags = const [],
+    this.context = const {},
+    this.fromCache = false,
   });
 
   /// Instantiate this class from a map data
@@ -40,7 +40,9 @@ class CloudinaryResponse {
       url: data['url'] ?? '',
       secureUrl: data['secure_url'] ?? '',
       originalFilename: data['original_filename'] ?? '',
-      tags: data['tags'] != null ? (data['tags'] as List).map((tag) => tag as String).toList() : [],
+      tags: data['tags'] != null
+          ? (data['tags'] as List).map((tag) => tag as String).toList()
+          : [],
       context: data['context'] is Map ? data['context'] : {},
       rawResponse: data,
     );
